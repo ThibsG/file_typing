@@ -16,12 +16,14 @@ class Magic
     void open(const std::string& filepath);
 
     const std::string& mime() const;
-//     std::string type() const;
-//     std::string format() const;
+    const std::string& type() const;
+    const std::string& format() const;
 
   private:
     magic_t m_magic;
     std::string m_mime;
+    std::string m_type;
+    std::string m_format;
 };
 
 }
