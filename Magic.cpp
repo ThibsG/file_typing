@@ -20,6 +20,7 @@ Magic::~Magic()
 
 bool Magic::open(const string& filepath)
 {
+  m_error.clear();
   m_mime.clear();
   m_type.clear();
   m_format.clear();
@@ -35,6 +36,11 @@ bool Magic::open(const string& filepath)
 
   m_error = mime;
   return false;
+}
+
+const string& Magic::error() const
+{
+  return m_error;
 }
 
 const string& Magic::mime() const
