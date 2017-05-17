@@ -33,6 +33,7 @@ bool Magic::open(const string& filepath)
     return true;
   }
 
+  m_error = mime;
   return false;
 }
 

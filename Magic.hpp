@@ -19,6 +19,8 @@ class Magic
 
     bool open(const std::string& filepath);
 
+    const std::string& error() const;
+
     const std::string& mime() const;
     const std::string& type() const;
     const std::string& format() const;
@@ -28,6 +30,7 @@ class Magic
     std::string m_mime;
     std::string m_type;
     std::string m_format;
+    std::string m_error;
 };
 
 }
