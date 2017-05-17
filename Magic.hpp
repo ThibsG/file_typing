@@ -26,7 +26,7 @@ class Magic
     const std::string& format() const;
 
   private:
-    magic_t m_magic;
+    magic_t m_handle;
     std::string m_mime;
     std::string m_type;
     std::string m_format;
