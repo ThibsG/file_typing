@@ -18,19 +18,22 @@ Magic::~Magic()
   ::magic_close(m_magic);
 }
 
-void Magic::open(const string& filepath)
+bool Magic::open(const string& filepath)
 {
   m_mime.clear();
   m_type.clear();
   m_format.clear();
-  const auto mime = ::magic_file(m_magic, filepath.c_str());
+  string mime = ::magic_file(m_magic, filepath.c_str());
 
   smatch sm;
   if(regex_match(mime, sm, MimeReg)) {
-    m_mime = mime;
+    m_mime   = mime;
     m_type   = sm[1];
     m_format = sm[2];
+    return true;
   }
+
+  return false;
 }
 
 const string& Magic::mime() const

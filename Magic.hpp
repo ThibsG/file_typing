@@ -17,7 +17,7 @@ class Magic
     explicit Magic(int flags = MAGIC_MIME_TYPE);
     ~Magic();
 
-    void open(const std::string& filepath);
+    bool open(const std::string& filepath);
 
     const std::string& mime() const;
     const std::string& type() const;
