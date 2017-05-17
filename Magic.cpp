@@ -1,10 +1,11 @@
 #include "Magic.hpp"
 
-
 using namespace std;
 
 namespace File
 {
+
+static const regex MimeReg("(\\w+)/(\\w+)");
 
 Magic::Magic(int flags) :
   m_magic(::magic_open(flags))
@@ -19,9 +20,17 @@ Magic::~Magic()
 
 void Magic::open(const string& filepath)
 {
-  m_mime = ::magic_file(m_magic, filepath.c_str());
-  m_type = m_mime.substr(0, m_mime.find('/'));
-  m_format = m_mime.substr(m_mime.find('/') + 1);
+  m_mime.clear();
+  m_type.clear();
+  m_format.clear();
+  const auto mime = ::magic_file(m_magic, filepath.c_str());
+
+  smatch sm;
+  if(regex_match(mime, sm, MimeReg)) {
+    m_mime = mime;
+    m_type   = sm[1];
+    m_format = sm[2];
+  }
 }
 
 const string& Magic::mime() const

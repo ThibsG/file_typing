@@ -2,7 +2,11 @@
 #define MAGIC_HPP
 
 #include <string>
+#include <regex>
+
+extern "C" {
 #include <magic.h>
+}
 
 namespace File
 {
