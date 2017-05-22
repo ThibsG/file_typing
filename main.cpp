@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 #include "Magic.hpp"
 
@@ -11,12 +12,12 @@ int main(int argc, char** argv)
 
   Magic m;
   if(m.open(argv[1])) {
-    std::cout << "Mime : " << m.mime() << std::endl;
-    std::cout << "Type : " << m.type() << std::endl;
-    std::cout << "Format : " << m.format() << std::endl;
-    std::cout << "Flags : " << m.flags() << std::endl;
+    cout << "Mime : " << m.mime() << endl;
+    cout << "Type : " << m.type() << endl;
+    cout << "Format : " << m.format() << endl;
+    cout << "Flags : 0x" << setfill('0') << setw(6) << hex << m.flags() << endl;
   } else {
-    std::cout << "Error : " << m.error() << std::endl;
+    cout << "Error : " << m.error() << endl;
   }
 
   return 0;
