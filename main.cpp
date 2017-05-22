@@ -14,6 +14,7 @@ int main(int argc, char** argv)
     std::cout << "Mime : " << m.mime() << std::endl;
     std::cout << "Type : " << m.type() << std::endl;
     std::cout << "Format : " << m.format() << std::endl;
+    std::cout << "Flags : " << m.flags() << std::endl;
   } else {
     std::cout << "Error : " << m.error() << std::endl;
   }

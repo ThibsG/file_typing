@@ -21,14 +21,16 @@ class Magic
 
     bool open(const std::string& filepath);
 
+    int flags() const;
     const std::string& error() const;
-
     const std::string& mime() const;
     const std::string& type() const;
     const std::string& format() const;
 
   private:
     magic_t m_handle;
+
+    int m_flags;
     std::string m_mime;
     std::string m_type;
     std::string m_format;

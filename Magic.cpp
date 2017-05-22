@@ -8,7 +8,8 @@ namespace File
 static const regex MimeReg("(\\w+)/(\\w+)");
 
 Magic::Magic(int flags) :
-  m_handle(::magic_open(flags))
+  m_handle(::magic_open(flags)),
+  m_flags(flags)
 {
   ::magic_load(m_handle, NULL);
 }
@@ -36,6 +37,11 @@ bool Magic::open(const string& filepath)
 
   m_error = mime;
   return false;
+}
+
+int Magic::flags() const
+{
+  return m_flags;
 }
 
 const string& Magic::error() const
