@@ -15,6 +15,8 @@ class Magic
 {
   public:
     explicit Magic(int flags = MAGIC_MIME_TYPE);
+    Magic(const Magic&) = delete;
+    Magic(Magic&&) = delete;
     ~Magic();
 
     bool open(const std::string& filepath);
