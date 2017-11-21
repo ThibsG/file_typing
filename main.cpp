@@ -10,8 +10,10 @@ int main(int argc, char** argv)
 {
   cout << ":: File typing" << endl;
 
+  const std::string filepath(argv[1]);
+
   Magic m;
-  if(m.open(argv[1])) {
+  if(m.open(filepath)) {
     cout << "Mime : " << m.mime() << endl;
     cout << "Type : " << m.type() << endl;
     cout << "Format : " << m.format() << endl;
@@ -19,6 +21,8 @@ int main(int argc, char** argv)
   } else {
     cout << "Error : " << m.error() << endl;
   }
+
+  const auto tf = Magic::type(filepath);
 
   return 0;
 };

@@ -1,4 +1,4 @@
 # File typing
 
 
-Simple program for file typing, using libmagic.
+Simple C++ wrapper for file typing using libmagic.

@@ -7,6 +7,15 @@ namespace File
 
 static const regex MimeReg("(\\w+)/(\\w+)");
 
+TypeFmt Magic::type(const string& filepath)
+{
+  Magic m;
+  auto ok = m.open(filepath);
+  if(not ok)
+    throw std::runtime_error(m.error());
+  return TypeFmt(m.type(), m.format());
+}
+
 Magic::Magic(int flags) :
   m_handle(::magic_open(flags)),
   m_flags(flags)

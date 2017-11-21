@@ -3,6 +3,7 @@
 
 #include <string>
 #include <regex>
+#include <tuple>
 
 extern "C" {
 #include <magic.h>
@@ -11,9 +12,14 @@ extern "C" {
 namespace File
 {
 
+// MIME tuple: <Type, Format>
+using TypeFmt = std::tuple<std::string, std::string>;
+
 class Magic
 {
   public:
+    static TypeFmt type(const std::string& filepath);
+
     explicit Magic(int flags = MAGIC_MIME_TYPE);
     Magic(const Magic&) = delete;
     Magic(Magic&&) = delete;
