@@ -4,7 +4,7 @@
 #include "Magic.hpp"
 
 using namespace std;
-using namespace File;
+using namespace FileTyping;
 
 int main(int argc, char** argv)
 {

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace File
+namespace FileTyping
 {
 
 static const regex MimeReg("(\\w+)/(\\w+)");

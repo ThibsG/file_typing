@@ -9,7 +9,7 @@ extern "C" {
 #include <magic.h>
 }
 
-namespace File
+namespace FileTyping
 {
 
 // MIME tuple: <Type, Format>
