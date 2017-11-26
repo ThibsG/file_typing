@@ -10,9 +10,7 @@ static const regex MimeReg("(\\w+)/(\\w+)");
 TypeFmt Magic::type(const string& filepath)
 {
   Magic m;
-  auto ok = m.open(filepath);
-  if(not ok)
-    throw std::runtime_error(m.error());
+  m.open(filepath);
   return TypeFmt(m.type(), m.format());
 }
 
@@ -28,7 +26,7 @@ Magic::~Magic()
   ::magic_close(m_handle);
 }
 
-bool Magic::open(const string& filepath)
+void Magic::open(const string& filepath)
 {
   m_error.clear();
   m_mime.clear();
@@ -41,11 +39,10 @@ bool Magic::open(const string& filepath)
     m_mime   = mime;
     m_type   = sm[1];
     m_format = sm[2];
-    return true;
+  } else {
+    m_error = mime;
+    throw runtime_error(mime);
   }
-
-  m_error = mime;
-  return false;
 }
 
 int Magic::flags() const

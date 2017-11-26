@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <tuple>
-#include <cassert>
 
 #include "Magic.hpp"
 

@@ -25,7 +25,7 @@ class Magic
     Magic(Magic&&) = delete;
     ~Magic();
 
-    bool open(const std::string& filepath);
+    void open(const std::string& filepath);
 
     int flags() const;
     const std::string& error() const;
@@ -37,10 +37,10 @@ class Magic
     magic_t m_handle;
 
     int m_flags;
+    std::string m_error;
     std::string m_mime;
     std::string m_type;
     std::string m_format;
-    std::string m_error;
 };
 
 }
