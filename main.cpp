@@ -15,7 +15,7 @@ int main(int argc, char** argv)
   cout << ":: File typing" << endl;
   cout << "::\t" << filepath << endl;
 
-  auto check = [&](auto&& first, auto&& second, const string& exc) noexcept {
+  auto check = [&](auto&& first, auto&& second, const string& exc) {
     if(first != second)
       throw runtime_error(exc);
   };
