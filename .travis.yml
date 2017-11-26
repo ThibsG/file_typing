@@ -26,3 +26,5 @@ before_script:
 script:
   - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake ..
   - make
+  - make test
+
