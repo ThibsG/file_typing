@@ -14,6 +14,13 @@ TypeFmt Magic::type(const string& filepath)
   return TypeFmt(m.type(), m.format());
 }
 
+TypeFmt Magic::type(const vector<unsigned char>& raw)
+{
+  Magic m;
+  m.load(raw);
+  return TypeFmt(m.type(), m.format());
+}
+
 Magic::Magic(int flags) :
   m_handle(::magic_open(flags)),
   m_flags(flags)

@@ -19,6 +19,7 @@ class Magic
 {
   public:
     static TypeFmt type(const std::string& filepath);
+    static TypeFmt type(const std::vector<unsigned char>& raw);
 
     explicit Magic(int flags = MAGIC_MIME_TYPE);
     Magic(const Magic&) = delete;

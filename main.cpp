@@ -21,7 +21,7 @@ int main(int argc, char** argv)
   };
 
   try {
-    // Using filepath
+    // Using object with filepath
     Magic m;
     m.open(filepath);
 
@@ -32,24 +32,35 @@ int main(int argc, char** argv)
       string type, format;
       tie(type, format) = Magic::type(filepath);
 
-      check(type, m.type(), "[Static call] Type detection failed");
+      check(type,   m.type(),   "[Static call] Type detection failed");
       check(format, m.format(), "[Static call] Format detection failed");
     }
 
     // Loading file into a buffer as raw
-    {
-      std::ifstream fileStreamer(filepath.c_str(), std::ios::binary);
-      vector<unsigned char> rawVec(
-        (istreambuf_iterator<char>(fileStreamer)),
-         istreambuf_iterator<char>());
+    std::ifstream fStreamer(filepath.c_str(), std::ios::binary);
+    vector<unsigned char> rawVec(
+      (istreambuf_iterator<char>(fStreamer)),
+        istreambuf_iterator<char>());
 
+    // Using object with raw loading
+    {
       Magic rawM;
       rawM.load(rawVec);
 
-      check(rawM.type(), m.type(), "[Raw loading call] Type detection failed");
+      check(rawM.type(),   m.type(),   "[Raw loading call] Type detection failed");
       check(rawM.format(), m.format(), "[Raw loading call] Format detection failed");
     }
 
+    // Using raw loading static call
+    {
+      string type, format;
+      tie(type, format) = Magic::type(rawVec);
+
+      check(type,   m.type(),   "[Raw loading static call] Type detection failed");
+      check(format, m.format(), "[Raw loading static call] Format detection failed");
+    }
+
+    // Several args are used for test comparison
     if(argc > 2) {
       const string cmpMimetype(argv[2]);
       check(cmpMimetype, m.mime(), "Mimetype comparison failed");
