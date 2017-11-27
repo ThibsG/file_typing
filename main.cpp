@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <tuple>
+#include <fstream>
 
 #include "Magic.hpp"
 
@@ -20,16 +21,34 @@ int main(int argc, char** argv)
   };
 
   try {
+    // Using filepath
     Magic m;
     m.open(filepath);
 
     cout << "\t\tUsed flags : 0x" << setfill('0') << setw(6) << hex << m.flags() << endl;
 
-    string type, format;
-    std::tie(type, format) = Magic::type(filepath);
+    // Using filepath via static call
+    {
+      string type, format;
+      tie(type, format) = Magic::type(filepath);
 
-    check(type, m.type(), "Type detection failed");
-    check(format, m.format(), "Format detection failed");
+      check(type, m.type(), "[Static call] Type detection failed");
+      check(format, m.format(), "[Static call] Format detection failed");
+    }
+
+    // Loading file into a buffer as raw
+    {
+      std::ifstream fileStreamer(filepath.c_str(), std::ios::binary);
+      vector<unsigned char> rawVec(
+        (istreambuf_iterator<char>(fileStreamer)),
+         istreambuf_iterator<char>());
+
+      Magic rawM;
+      rawM.load(rawVec);
+
+      check(rawM.type(), m.type(), "[Raw loading call] Type detection failed");
+      check(rawM.format(), m.format(), "[Raw loading call] Format detection failed");
+    }
 
     if(argc > 2) {
       const string cmpMimetype(argv[2]);

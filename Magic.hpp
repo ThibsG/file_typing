@@ -25,7 +25,9 @@ class Magic
     Magic(Magic&&) = delete;
     ~Magic();
 
+    void clear();
     void open(const std::string& filepath);
+    void load(const std::vector<unsigned char>& raw);
 
     int flags() const;
     const std::string& error() const;
@@ -41,6 +43,8 @@ class Magic
     std::string m_mime;
     std::string m_type;
     std::string m_format;
+
+    void evaluate(const std::string& mime);
 };
 
 }

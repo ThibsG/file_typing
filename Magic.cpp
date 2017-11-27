@@ -26,14 +26,34 @@ Magic::~Magic()
   ::magic_close(m_handle);
 }
 
-void Magic::open(const string& filepath)
+void Magic::clear()
 {
   m_error.clear();
   m_mime.clear();
   m_type.clear();
   m_format.clear();
+}
+
+void Magic::open(const string& filepath)
+{
+  clear();
+
   string mime = ::magic_file(m_handle, filepath.c_str());
 
+  evaluate(mime);
+}
+
+void Magic::load(const vector<unsigned char>& raw)
+{
+  clear();
+
+  string mime = ::magic_buffer(m_handle, raw.data(), raw.size());
+
+  evaluate(mime);
+}
+
+void Magic::evaluate(const string& mime)
+{
   smatch sm;
   if(regex_match(mime, sm, MimeReg)) {
     m_mime   = mime;
